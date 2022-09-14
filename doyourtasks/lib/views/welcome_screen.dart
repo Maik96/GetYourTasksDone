@@ -12,7 +12,7 @@ class WelcomeScreen extends StatelessWidget {
           child: Container(
         width: 200,
         height: 200,
-        decoration: const BoxDecoration(color: Colors.blue),
+        decoration: const BoxDecoration(color: Colors.lightGreenAccent),
         child: const Center(
           child: Text(
             "Hallo",
