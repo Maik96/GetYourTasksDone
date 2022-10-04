@@ -1,6 +1,6 @@
-import 'package:doyourtasks/views/home_screen_content.dart';
-import 'package:doyourtasks/views/testresponsive.dart';
-import 'package:doyourtasks/views/welcome_screen.dart';
+import 'package:doyourtasks/views/home_screen/home_screen_content.dart';
+import 'package:doyourtasks/others/testresponsive.dart';
+import 'package:doyourtasks/views/welcome_page/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: WelcomeScreen(),
     );
   }
 }
