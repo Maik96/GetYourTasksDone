@@ -1,5 +1,3 @@
-import 'package:doyourtasks/views/home_screen/home_screen_content.dart';
-import 'package:doyourtasks/others/testresponsive.dart';
 import 'package:doyourtasks/views/welcome_page/welcome_screen.dart';
 import 'package:flutter/material.dart';
 

@@ -1,4 +1,5 @@
-import 'package:doyourtasks/views/add_screen/add_conent_view.dart';
+import 'package:doyourtasks/views/add_screen/add_screen.dart';
+import 'package:doyourtasks/views/add_screen/add_screen_content.dart';
 import 'package:doyourtasks/views/task_view/task_content_view.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,7 @@ class HomeScreenContent extends StatelessWidget {
       body: Container(
         height: size.height,
         decoration:
-            const BoxDecoration(color: Color.fromARGB(250, 73, 41, 162)),
+            const BoxDecoration(color: Color.fromARGB(250, 20, 98, 233)),
         child: Column(
           children: [
             SizedBox(width: size.width, height: 80),
@@ -38,17 +39,18 @@ class HomeScreenContent extends StatelessWidget {
                   width: 40,
                 ),
                 Container(
-                  decoration: const BoxDecoration(
-                      // border: Border.all(width: 2),
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(100))),
+                  decoration: BoxDecoration(
+                    // border: Border.all(width: 2),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(100),
+                    ),
+                    border: Border.all(
+                        color: Color.fromARGB(255, 9, 22, 180), width: 3),
+                  ),
                   height: 120,
                   width: 120,
-                  //    child: const Icon(
-                  //    Icons.boy,
-                  //  color: Colors.black,
-                  // size: 90,
-                  //  ),
+                  child: Image.asset('assets/images/RockYourTasksRound.png'),
                 ),
                 // Wird nacher gefuellt mit einem Icon
                 Container(
@@ -79,89 +81,61 @@ class HomeScreenContent extends StatelessWidget {
                 ),
               ]),
             ),
-            SizedBox(
-              height: 30,
+            SizedBox(height: 10),
+            Row(
+              children: [
+                SizedBox(width: 20),
+                Container(
+                  height: 60,
+                  width: 250,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.red, width: 3),
+                    color: Colors.white,
+                  ),
+                  child: Center(
+                    child: Text("4 tasks remaining",
+                        style: TextStyle(fontSize: 19),
+                        textAlign: TextAlign.left),
+                  ),
+                ),
+                SizedBox(
+                  height: 40,
+                  width: 40,
+                ),
+                Container(
+                  height: 80,
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.add,
+                      size: 70,
+                    ),
+                    color: Colors.white,
+                    onPressed: () {
+                      _navigateToAddScreen(context);
+                    },
+                  ),
+                ),
+              ],
             ),
-            Center(
+            Expanded(
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
-                  height: size.height * 0.67,
+                  height: size.height * 0.55,
                   width: size.width,
-                  alignment: Alignment.bottomLeft,
+                  alignment: Alignment.topCenter,
                   decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(50),
-                        topLeft: Radius.circular(50),
+                        topRight: Radius.circular(30),
+                        topLeft: Radius.circular(30),
                       ),
                       color: Colors.white),
                   child: Column(
                     children: [
                       Container(
-                        width: 30,
-                        height: 7,
-                      ),
-                      Align(
-                        child: Container(
-                          width: size.width,
-                          height: size.height * 0.1,
-                          decoration: const BoxDecoration(),
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Container(
-                                    height: 100,
-                                    width: size.width * 0.5,
-                                    decoration: BoxDecoration(
-                                        //  border: Border.all(width: 1)
-                                        ),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: const [
-                                        Text(
-                                          "Your tasks",
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 24,
-                                          ),
-                                        ),
-                                        Text("4 tasks remaining",
-                                            textAlign: TextAlign.center),
-                                      ],
-                                    )),
-                                Container(
-                                  decoration: const BoxDecoration(
-                                      // border: Border.all(width: 2),
-                                      ),
-                                  height: 10,
-                                  width: size.width * 0.18,
-                                ),
-                                Container(
-                                  decoration: const BoxDecoration(
-                                      // border: Border.all(width: 1)
-                                      ),
-                                  height: 50,
-                                  width: 50,
-                                  child: IconButton(
-                                    icon: const Icon(
-                                      Icons.add,
-                                      size: 50,
-                                    ),
-                                    color: Colors.black,
-                                    onPressed: () {
-                                      _navigateToAddScreen(context);
-                                    },
-                                  ),
-                                ),
-                              ]),
-                        ),
-                      ),
-                      SizedBox(height: 20, width: size.width),
-                      Container(
                         width: size.width,
-                        height: size.height * 0.45,
+                        height: size.height * 0.50,
                         //   decoration: BoxDecoration(border: Border.all(width: 2)),
                         child: TaskContentView(),
                       ),
