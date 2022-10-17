@@ -1,12 +1,20 @@
+import 'package:doyourtasks/database/database_helper.dart';
+import 'package:doyourtasks/database/user.dart';
+import 'package:doyourtasks/views/add_screen/add_screen.dart';
 import 'package:doyourtasks/views/home_screen/home_screen_content.dart';
-import 'package:doyourtasks/views/welcome_page/welcome_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
-class AddScreenContent extends StatelessWidget {
+import 'package:flutter/material.dart';
+
+class AddScreenContent extends StatefulWidget {
   const AddScreenContent(Size size, BuildContext context, {super.key});
 
+  @override
+  _AddScreenContentState createState() => _AddScreenContentState();
+}
+
+class _AddScreenContentState extends State<AddScreenContent> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController descController = TextEditingController();
   void _navigateToHomeScreenAfterAdd(BuildContext context) {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => HomeScreen()));
@@ -19,12 +27,15 @@ class AddScreenContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final editedTaskItem = ModalRoute.of(context)!.settings.arguments as User;
     final size = MediaQuery.of(context).size;
+    bool inEditMode = editedTaskItem.name != '';
 
-    return AddScreen(size, context);
-  }
+    if (inEditMode) {
+      nameController.text = editedTaskItem.name;
+      descController.text = editedTaskItem.name;
+    }
 
-  Scaffold AddScreen(Size size, BuildContext context) {
     return Scaffold(
       body: Container(
         height: size.height,
@@ -67,6 +78,7 @@ class AddScreenContent extends StatelessWidget {
               height: 65,
               width: 370,
               child: TextField(
+                controller: nameController,
                 decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
@@ -83,6 +95,7 @@ class AddScreenContent extends StatelessWidget {
               height: 120,
               width: 370,
               child: TextField(
+                controller: descController,
                 textAlign: TextAlign.start,
                 textAlignVertical: TextAlignVertical.top,
                 minLines: 4,
@@ -101,8 +114,25 @@ class AddScreenContent extends StatelessWidget {
             SizedBox(height: 30),
             Center(
               child: ElevatedButton(
-                onPressed: () {
-                  _navigateToHomeScreenAfterAdd(context);
+                onPressed: () async {
+                  if (inEditMode) {
+                    // ShoppingItem newShoppingItem = editedShoppingItem.copyWith(name: _textEditingController.text);
+                    // int indexOfEditedItem = shoppingList.indexOf(editedShoppingItem);
+                    // shoppingList[indexOfEditedItem] = newShoppingItem;
+
+                    await DatabaseHelper.instance.update(User(
+                      name: nameController.text,
+                      desc: descController.text,
+                      id: editedTaskItem.id,
+                    ));
+                  } else {
+                    await DatabaseHelper.instance.add(User(
+                        name: nameController.text, desc: descController.text));
+                  }
+
+                  nameController.clear();
+                  descController.clear();
+                  Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
                     primary: Color.fromARGB(250, 20, 98, 233),

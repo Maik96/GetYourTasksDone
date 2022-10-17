@@ -8,10 +8,6 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    String name = "Hi Maik";
-    String afternoonText = "Good afternoon";
-
-    return HomeScreenContent(
-        size: size, name: name, afternoonText: afternoonText);
+    return HomeScreenContent();
   }
 }

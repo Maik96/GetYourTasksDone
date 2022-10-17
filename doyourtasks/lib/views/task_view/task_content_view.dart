@@ -49,7 +49,7 @@ class TaskContentView extends StatelessWidget {
                     child: Container(
                       margin: const EdgeInsets.only(left: 20),
                       child: const Text(
-                        "Beispiel",
+                        "test",
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
