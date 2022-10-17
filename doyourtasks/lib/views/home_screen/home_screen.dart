@@ -173,7 +173,8 @@ class _HomeScreenState extends State<HomeScreenContent> {
                                                     onPressed: () {
                                                       Navigator.pushNamed(
                                                               context, '/add',
-                                                              arguments: item)
+                                                              arguments:
+                                                                  item) //Test
                                                           .then((value) =>
                                                               setState(() {}));
                                                     },
