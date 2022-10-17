@@ -49,7 +49,7 @@ class _AddScreenContentState extends State<AddScreenContent> {
               height: 130,
               width: size.width,
               child: Image.asset(
-                'assets/images/RockYourTasks.png',
+                'assets/images/RockYourTasks.png', // Test wegen neuem Branch
               ),
             ),
             const SizedBox(height: 20),
