@@ -12,6 +12,6 @@ class AddContentView extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return AddScreenContent(size, context);
+    return AddScreenContent();
   }
 }

@@ -120,7 +120,10 @@ class _HomeScreenState extends State<HomeScreenContent> {
                         ),
                         color: Colors.white,
                         onPressed: () {
-                          _navigateToAddScreen(context);
+                          Navigator.pushNamed(context, '/add',
+                                  arguments:
+                                      User(name: '', desc: '', done: true))
+                              .then((value) => setState(() {}));
                         },
                       ),
                     ),
@@ -157,66 +160,70 @@ class _HomeScreenState extends State<HomeScreenContent> {
                                     ? Center(
                                         child: Text('No item'),
                                       )
-                                    : ListView(
-                                        children: snapshot.data!.map((item) {
-                                        return Row(children: [
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              Navigator.pushNamed(
-                                                      context, '/add',
-                                                      arguments: item)
-                                                  .then((value) =>
-                                                      setState(() {}));
-                                            },
-                                            child: Text('Edit'),
-                                          ),
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                DatabaseHelper.instance
-                                                    .remove(item.id!);
-                                              });
-                                              _showSnackBar(context,
-                                                  '${item.name} deleted.');
-                                            },
-                                            child: Text("Delete"),
-                                          ),
-                                          CheckboxListTile(
-                                            title: Text(
-                                              item.name,
-                                              style: TextStyle(
-                                                color: item.done
-                                                    ? Colors.grey
-                                                    : null,
-                                                decoration: item.done
-                                                    ? TextDecoration.lineThrough
-                                                    : null,
-                                              ),
-                                            ),
-                                            value: item.done,
-                                            onChanged: (newValue) {
-                                              setState(() {
-                                                DatabaseHelper.instance.update(
-                                                    item.copyWith(
-                                                        done: newValue));
-                                              });
-                                            },
-                                          ),
-                                        ]);
-                                      }).toList());
-
-                                floatingActionButton:
-                                FloatingActionButton(
-                                  onPressed: () {
-                                    Navigator.pushNamed(context, '/add',
-                                            arguments: User(
-                                                name: '',
-                                                desc: '',
-                                                done: false))
-                                        .then((value) => setState(() {}));
-                                  },
-                                  child: Icon(Icons.add),
-                                );
+                                    : SizedBox(
+                                        height: 500,
+                                        width: size.width,
+                                        child: ListView(
+                                            shrinkWrap: true,
+                                            children:
+                                                snapshot.data!.map((item) {
+                                              return Flexible(
+                                                child: Row(children: [
+                                                  ElevatedButton(
+                                                    onPressed: () {
+                                                      Navigator.pushNamed(
+                                                              context, '/add',
+                                                              arguments: item)
+                                                          .then((value) =>
+                                                              setState(() {}));
+                                                    },
+                                                    child: Text('Edit'),
+                                                  ),
+                                                  ElevatedButton(
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        DatabaseHelper.instance
+                                                            .remove(item.id!);
+                                                      });
+                                                      _showSnackBar(context,
+                                                          '${item.name} deleted.');
+                                                    },
+                                                    child: new Flexible(
+                                                      child: Text("Delete"),
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    child: CheckboxListTile(
+                                                      title: Flexible(
+                                                        child: Text(
+                                                          item.name,
+                                                          style: TextStyle(
+                                                            color: item.done
+                                                                ? Colors.grey
+                                                                : null,
+                                                            decoration: item
+                                                                    .done
+                                                                ? TextDecoration
+                                                                    .lineThrough
+                                                                : null,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      value: item.done,
+                                                      onChanged: (newValue) {
+                                                        setState(() {
+                                                          DatabaseHelper
+                                                              .instance
+                                                              .update(item.copyWith(
+                                                                  done:
+                                                                      newValue));
+                                                        });
+                                                      },
+                                                    ),
+                                                  ),
+                                                ]),
+                                              );
+                                            }).toList()));
                               }),
                         ),
                       ]),

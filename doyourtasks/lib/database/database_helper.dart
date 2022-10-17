@@ -1,9 +1,9 @@
 import 'dart:io';
+// ignore: depend_on_referenced_packages
 import 'package:path/path.dart';
 import 'package:doyourtasks/database/user.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:sqflite/sqlite_api.dart';
 
 class DatabaseHelper {
   DatabaseHelper._privateConstructor();
@@ -17,7 +17,7 @@ class DatabaseHelper {
     String path = join(documentsDirectory.path, 'getyourtasksdone.db');
     return await openDatabase(
       path,
-      version: 1,
+      version: 2,
       onCreate: _onCreate,
     );
   }
@@ -28,7 +28,8 @@ class DatabaseHelper {
         id INTEGER PRIMARY KEY,
         name TEXT,
         desc TEXT,
-        done INTEGER 
+        done INTEGER
+        
       )
     ''');
   }

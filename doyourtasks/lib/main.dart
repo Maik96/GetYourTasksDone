@@ -1,4 +1,5 @@
 import 'package:doyourtasks/views/add_screen/add_screen.dart';
+import 'package:doyourtasks/views/add_screen/add_screen_content.dart';
 import 'package:doyourtasks/views/home_screen/home_screen_content.dart';
 import 'package:doyourtasks/views/welcome_page/welcome_screen.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => HomeScreen(),
-        '/add': (context) => AddContentView(),
+        '/add': (context) => AddScreenContent(),
       },
     );
   }

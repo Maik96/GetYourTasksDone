@@ -1,34 +1,23 @@
 import 'package:doyourtasks/database/database_helper.dart';
 import 'package:doyourtasks/database/user.dart';
-import 'package:doyourtasks/views/add_screen/add_screen.dart';
-import 'package:doyourtasks/views/home_screen/home_screen_content.dart';
 
 import 'package:flutter/material.dart';
 
 class AddScreenContent extends StatefulWidget {
-  const AddScreenContent(Size size, BuildContext context, {super.key});
+  const AddScreenContent({Key? key}) : super(key: key);
 
   @override
   _AddScreenContentState createState() => _AddScreenContentState();
 }
 
 class _AddScreenContentState extends State<AddScreenContent> {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController descController = TextEditingController();
-  void _navigateToHomeScreenAfterAdd(BuildContext context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => HomeScreen()));
-  }
-
-  void _navigateToHomeScreenAfterGetBack(BuildContext context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => HomeScreen()));
-  }
+  TextEditingController nameController = TextEditingController(text: '');
+  TextEditingController descController = TextEditingController(text: '');
 
   @override
   Widget build(BuildContext context) {
-    final editedTaskItem = ModalRoute.of(context)!.settings.arguments as User;
     final size = MediaQuery.of(context).size;
+    final editedTaskItem = ModalRoute.of(context)!.settings.arguments as User;
     bool inEditMode = editedTaskItem.name != '';
 
     if (inEditMode) {
@@ -49,7 +38,7 @@ class _AddScreenContentState extends State<AddScreenContent> {
               height: 130,
               width: size.width,
               child: Image.asset(
-                'assets/images/RockYourTasks.png', // Test wegen neuem Branch
+                'assets/images/RockYourTasks.png',
               ),
             ),
             const SizedBox(height: 20),
@@ -116,10 +105,6 @@ class _AddScreenContentState extends State<AddScreenContent> {
               child: ElevatedButton(
                 onPressed: () async {
                   if (inEditMode) {
-                    // ShoppingItem newShoppingItem = editedShoppingItem.copyWith(name: _textEditingController.text);
-                    // int indexOfEditedItem = shoppingList.indexOf(editedShoppingItem);
-                    // shoppingList[indexOfEditedItem] = newShoppingItem;
-
                     await DatabaseHelper.instance.update(User(
                       name: nameController.text,
                       desc: descController.text,
@@ -127,31 +112,30 @@ class _AddScreenContentState extends State<AddScreenContent> {
                     ));
                   } else {
                     await DatabaseHelper.instance.add(User(
-                        name: nameController.text, desc: descController.text));
+                        name: nameController.text,
+                        desc: descController.text,
+                        id: editedTaskItem.id));
                   }
 
                   nameController.clear();
                   descController.clear();
-                  Navigator.pop(context);
+                  Navigator.of(context).pop();
                 },
+                child: const Text("Let's rock your tasks",
+                    style:
+                        TextStyle(color: Color.fromARGB(255, 255, 255, 255))),
                 style: ElevatedButton.styleFrom(
                     primary: Color.fromARGB(250, 20, 98, 233),
                     padding: const EdgeInsets.symmetric(
                         horizontal: 80, vertical: 23),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30))),
-                child: const Text(
-                  "Let's rock your tasks",
-                  style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-                ),
               ),
             ),
             SizedBox(height: 30),
             Center(
               child: ElevatedButton(
-                onPressed: () {
-                  _navigateToHomeScreenAfterGetBack(context);
-                },
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
                     primary: Color.fromARGB(255, 255, 255, 255),
                     padding: const EdgeInsets.symmetric(
