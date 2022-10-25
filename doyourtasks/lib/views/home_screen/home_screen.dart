@@ -2,7 +2,6 @@ import 'package:doyourtasks/database/database_helper.dart';
 import 'package:doyourtasks/database/user.dart';
 import 'package:doyourtasks/views/add_screen/add_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 
 class HomeScreenContent extends StatefulWidget {
   HomeScreenContent({Key? key}) : super(key: key);
@@ -13,7 +12,7 @@ class HomeScreenContent extends StatefulWidget {
 
 void _navigateToAddScreen(BuildContext context) {
   Navigator.of(context)
-      .push(MaterialPageRoute(builder: (context) => AddContentView()));
+      .push(MaterialPageRoute(builder: (context) => const AddContentView()));
 }
 
 class _HomeScreenState extends State<HomeScreenContent> {
@@ -49,11 +48,12 @@ class _HomeScreenState extends State<HomeScreenContent> {
                       decoration: BoxDecoration(
                         // border: Border.all(width: 2),
                         color: Colors.white,
-                        borderRadius: BorderRadius.all(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(100),
                         ),
                         border: Border.all(
-                            color: Color.fromARGB(255, 9, 22, 180), width: 3),
+                            color: const Color.fromARGB(255, 9, 22, 180),
+                            width: 3),
                       ),
                       height: 120,
                       width: 120,
@@ -89,10 +89,10 @@ class _HomeScreenState extends State<HomeScreenContent> {
                     ),
                   ]),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Row(
                   children: [
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
                     Container(
                       height: 60,
                       width: 250,
@@ -101,13 +101,13 @@ class _HomeScreenState extends State<HomeScreenContent> {
                         border: Border.all(color: Colors.red, width: 3),
                         color: Colors.white,
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text("4 tasks remaining",
                             style: TextStyle(fontSize: 19),
                             textAlign: TextAlign.left),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 40,
                       width: 40,
                     ),
@@ -144,89 +144,55 @@ class _HomeScreenState extends State<HomeScreenContent> {
                           color: Colors.white),
                       child: Column(children: [
                         Container(
-                          width: size.width,
-                          height: size.height * 0.50,
-                          //   decoration: BoxDecoration(border: Border.all(width: 2)),
-                          child: FutureBuilder<List<User>>(
+                            width: size.width,
+                            height: size.height * 0.50,
+                            //   decoration: BoxDecoration(border: Border.all(width: 2)),
+                            child: FutureBuilder<List<User>>(
                               future: DatabaseHelper.instance.getTasks(),
                               builder: (BuildContext context,
                                   AsyncSnapshot<List<User>> snapshot) {
                                 if (!snapshot.hasData) {
-                                  return Center(
+                                  return const Center(
                                     child: Text(' Loading'),
                                   );
                                 }
                                 return snapshot.data!.isEmpty
-                                    ? Center(
+                                    ? const Center(
                                         child: Text('No item'),
                                       )
-                                    : SizedBox(
-                                        height: 500,
-                                        width: size.width,
-                                        child: ListView(
-                                            shrinkWrap: true,
-                                            children:
-                                                snapshot.data!.map((item) {
-                                              return Flexible(
-                                                child: Row(children: [
+                                    : GridView.builder(
+                                        gridDelegate:
+                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 2),
+                                        itemBuilder:
+                                            (BuildContext context, index) {
+                                          snapshot.data!.map((item) {
+                                            return Container(
+                                              child: Column(
+                                                children: [
+                                                  Text(item.name),
                                                   ElevatedButton(
-                                                    onPressed: () {
-                                                      Navigator.pushNamed(
-                                                              context, '/add',
-                                                              arguments:
-                                                                  item) //Test
-                                                          .then((value) =>
-                                                              setState(() {}));
-                                                    },
-                                                    child: Text('Edit'),
-                                                  ),
-                                                  ElevatedButton(
-                                                    onPressed: () {
-                                                      setState(() {
-                                                        DatabaseHelper.instance
-                                                            .remove(item.id!);
-                                                      });
-                                                      _showSnackBar(context,
-                                                          '${item.name} deleted.');
-                                                    },
-                                                    child: new Flexible(
-                                                      child: Text("Delete"),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: CheckboxListTile(
-                                                      title: Flexible(
-                                                        child: Text(
-                                                          item.name,
-                                                          style: TextStyle(
-                                                            color: item.done
-                                                                ? Colors.grey
-                                                                : null,
-                                                            decoration: item
-                                                                    .done
-                                                                ? TextDecoration
-                                                                    .lineThrough
-                                                                : null,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      value: item.done,
-                                                      onChanged: (newValue) {
+                                                      onPressed: () {
                                                         setState(() {
                                                           DatabaseHelper
                                                               .instance
-                                                              .update(item.copyWith(
-                                                                  done:
-                                                                      newValue));
+                                                              .remove(item.id!);
                                                         });
+                                                        _showSnackBar(context,
+                                                            '${item.name} deleted.');
                                                       },
-                                                    ),
-                                                  ),
-                                                ]),
-                                              );
-                                            }).toList()));
-                              }),
-                        ),
+                                                      child:
+                                                          const Text("Delete"))
+                                                ],
+                                              ),
+                                            );
+                                          }).toList();
+                                          return Center(
+                                              child:
+                                                  CircularProgressIndicator());
+                                        });
+                              },
+                            )),
                       ]),
                     ),
                   ),
