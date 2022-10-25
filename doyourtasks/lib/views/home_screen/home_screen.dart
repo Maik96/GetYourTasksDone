@@ -3,6 +3,7 @@ import 'package:doyourtasks/database/user.dart';
 import 'package:doyourtasks/views/add_screen/add_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:sqflite/sqlite_api.dart';
 
 class HomeScreenContent extends StatefulWidget {
   HomeScreenContent({Key? key}) : super(key: key);
@@ -25,6 +26,7 @@ class _HomeScreenState extends State<HomeScreenContent> {
 
   String name = "Hi Maik";
   String afternoonText = "Good afternoon";
+  String anzahl = DatabaseHelper.instance.getCount.toString();
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +54,6 @@ class _HomeScreenState extends State<HomeScreenContent> {
                         borderRadius: BorderRadius.all(
                           Radius.circular(100),
                         ),
-                        border: Border.all(
-                            color: Color.fromARGB(255, 9, 22, 180), width: 3),
                       ),
                       height: 120,
                       width: 120,
@@ -102,9 +102,14 @@ class _HomeScreenState extends State<HomeScreenContent> {
                         color: Colors.white,
                       ),
                       child: Center(
-                        child: Text("4 tasks remaining",
-                            style: TextStyle(fontSize: 19),
-                            textAlign: TextAlign.left),
+                        child: FutureBuilder<String>(
+                            //  future:
+                            //     DatabaseHelper.instance.getCount().toString(),
+                            builder: (context, AsyncSnapshot) {
+                          return Text(anzahl + "tasks remaining",
+                              style: TextStyle(fontSize: 19),
+                              textAlign: TextAlign.left);
+                        }),
                       ),
                     ),
                     SizedBox(
@@ -164,66 +169,136 @@ class _HomeScreenState extends State<HomeScreenContent> {
                                         height: 500,
                                         width: size.width,
                                         child: ListView(
-                                            shrinkWrap: true,
-                                            children:
-                                                snapshot.data!.map((item) {
-                                              return Flexible(
-                                                child: Row(children: [
-                                                  ElevatedButton(
-                                                    onPressed: () {
-                                                      Navigator.pushNamed(
-                                                              context, '/add',
-                                                              arguments: item)
-                                                          .then((value) =>
-                                                              setState(() {}));
-                                                    },
-                                                    child: Text('Edit'),
-                                                  ),
-                                                  ElevatedButton(
-                                                    onPressed: () {
-                                                      setState(() {
-                                                        DatabaseHelper.instance
-                                                            .remove(item.id!);
-                                                      });
-                                                      _showSnackBar(context,
-                                                          '${item.name} deleted.');
-                                                    },
-                                                    child: new Flexible(
-                                                      child: Text("Delete"),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: CheckboxListTile(
-                                                      title: Flexible(
-                                                        child: Text(
-                                                          item.name,
-                                                          style: TextStyle(
-                                                            color: item.done
-                                                                ? Colors.grey
-                                                                : null,
-                                                            decoration: item
-                                                                    .done
-                                                                ? TextDecoration
-                                                                    .lineThrough
-                                                                : null,
-                                                          ),
+                                          shrinkWrap: true,
+                                          padding:
+                                              EdgeInsets.fromLTRB(0, 0, 0, 10),
+                                          children: snapshot.data!.map((item) {
+                                            return Container(
+                                              height: 110,
+                                              width: 150,
+                                              decoration: BoxDecoration(
+                                                color: Color.fromARGB(
+                                                    255, 123, 196, 255),
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                              ),
+                                              child: Flexible(
+                                                child: Column(
+                                                  children: [
+                                                    Row(children: [
+                                                      Container(
+                                                        width: 130,
+                                                        child: Column(
+                                                          children: [
+                                                            ElevatedButton(
+                                                              onPressed: () {
+                                                                Navigator.pushNamed(
+                                                                        context,
+                                                                        '/add',
+                                                                        arguments:
+                                                                            item)
+                                                                    .then((value) =>
+                                                                        setState(
+                                                                            () {}));
+                                                              },
+                                                              child:
+                                                                  Text('Edit'),
+                                                              style: ElevatedButton.styleFrom(
+                                                                  fixedSize:
+                                                                      Size(105,
+                                                                          15),
+                                                                  primary: Colors
+                                                                      .blueAccent),
+                                                            ),
+                                                            ElevatedButton(
+                                                              onPressed: () {
+                                                                setState(() {
+                                                                  DatabaseHelper
+                                                                      .instance
+                                                                      .remove(item
+                                                                          .id!);
+                                                                });
+                                                              },
+                                                              child: Text(
+                                                                  "Delete"),
+                                                              style: ElevatedButton
+                                                                  .styleFrom(
+                                                                      fixedSize:
+                                                                          Size(
+                                                                              105,
+                                                                              15),
+                                                                      primary:
+                                                                          Colors
+                                                                              .red),
+                                                            ),
+                                                          ],
                                                         ),
                                                       ),
-                                                      value: item.done,
-                                                      onChanged: (newValue) {
-                                                        setState(() {
-                                                          DatabaseHelper
-                                                              .instance
-                                                              .update(item.copyWith(
-                                                                  done:
-                                                                      newValue));
-                                                        });
-                                                      },
-                                                    ),
-                                                  ),
-                                                ]),
-                                              );
-                                            }).toList()));
+                                                      Column(
+                                                        children: [
+                                                          Text(
+                                                            item.name,
+                                                            style: TextStyle(
+                                                              color: item.done
+                                                                  ? Colors.grey
+                                                                  : null,
+                                                              decoration: item
+                                                                      .done
+                                                                  ? TextDecoration
+                                                                      .lineThrough
+                                                                  : null,
+                                                            ),
+                                                          ),
+                                                          Text(item.desc),
+                                                        ],
+                                                      ),
+                                                      Expanded(
+                                                        child: CheckboxListTile(
+                                                          title: Flexible(
+                                                            child: Text(
+                                                              "",
+                                                              style: TextStyle(
+                                                                color: item.done
+                                                                    ? Colors
+                                                                        .grey
+                                                                    : null,
+                                                                decoration: item
+                                                                        .done
+                                                                    ? TextDecoration
+                                                                        .lineThrough
+                                                                    : null,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          value: item.done,
+                                                          onChanged:
+                                                              (newValue) {
+                                                            setState(() {
+                                                              DatabaseHelper
+                                                                  .instance
+                                                                  .update(item
+                                                                      .copyWith(
+                                                                          done:
+                                                                              newValue));
+                                                            });
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ]),
+                                                    Container(
+                                                      alignment: Alignment
+                                                          .bottomCenter,
+                                                      height: 14,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          }).toList(),
+                                        ),
+                                      );
                               }),
                         ),
                       ]),

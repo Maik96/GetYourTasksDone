@@ -65,14 +65,13 @@ class WelcomeScreenContent extends StatelessWidget {
                 width: 370,
                 child: TextField(
                   decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      hintText: "What's your name?",
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          borderSide: const BorderSide(color: Colors.red)),
-                      focusedBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red))),
+                    filled: true,
+                    fillColor: Colors.white,
+                    hintText: "What's your name?",
+                    //  enabledBorder: OutlineInputBorder(
+                    //     borderRadius: BorderRadius.circular(15),
+                    //      borderSide: const BorderSide(color: Colors.red)),
+                  ),
                 ),
               ),
               const SizedBox(height: 30),
@@ -126,7 +125,6 @@ class WelcomeScreenContent extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 80, vertical: 23),
                               shape: RoundedRectangleBorder(
-                                  side: BorderSide(width: 2, color: Colors.red),
                                   borderRadius: BorderRadius.circular(30))),
                           child: const Text(
                             "Let's rock your tasks",

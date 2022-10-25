@@ -39,6 +39,7 @@ class DatabaseHelper {
     var tasks = await db.query('getyourtasksdone', orderBy: 'name');
     List<User> taskList =
         tasks.isNotEmpty ? tasks.map((e) => User.fromMap(e)).toList() : [];
+
     return taskList;
   }
 
@@ -57,5 +58,13 @@ class DatabaseHelper {
     Database db = await instance.database;
     return await db.update('getyourtasksdone', item.toMap(),
         where: 'id = ?', whereArgs: [item.id]);
+  }
+
+  Future<int?> getCount() async {
+    Database db = await instance.database;
+    var x = await db.rawQuery('SELECT COUNT(*) FROM getyourtasksdone');
+    int? count = Sqflite.firstIntValue(x);
+    print(count);
+    return count;
   }
 }
