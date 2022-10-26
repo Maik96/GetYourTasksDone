@@ -3,6 +3,8 @@ import 'package:doyourtasks/database/user.dart';
 
 import 'package:flutter/material.dart';
 
+import '../home_screen/home_screen_content.dart';
+
 class AddScreenContent extends StatefulWidget {
   const AddScreenContent({Key? key}) : super(key: key);
 
@@ -13,6 +15,11 @@ class AddScreenContent extends StatefulWidget {
 class _AddScreenContentState extends State<AddScreenContent> {
   TextEditingController nameController = TextEditingController(text: '');
   TextEditingController descController = TextEditingController(text: '');
+
+  void _navigateToHomeScreen(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const HomeScreen()));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +142,9 @@ class _AddScreenContentState extends State<AddScreenContent> {
             SizedBox(height: 30),
             Center(
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  _navigateToHomeScreen(context);
+                },
                 style: ElevatedButton.styleFrom(
                     primary: Color.fromARGB(255, 255, 255, 255),
                     padding: const EdgeInsets.symmetric(
