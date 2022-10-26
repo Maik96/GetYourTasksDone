@@ -2,8 +2,11 @@ import 'package:doyourtasks/database/database_helper.dart';
 import 'package:doyourtasks/database/user.dart';
 import 'package:doyourtasks/views/add_screen/add_screen.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:sqflite/sqlite_api.dart';
+=======
+>>>>>>> gridlist
 
 class HomeScreenContent extends StatefulWidget {
   HomeScreenContent({Key? key}) : super(key: key);
@@ -14,7 +17,7 @@ class HomeScreenContent extends StatefulWidget {
 
 void _navigateToAddScreen(BuildContext context) {
   Navigator.of(context)
-      .push(MaterialPageRoute(builder: (context) => AddContentView()));
+      .push(MaterialPageRoute(builder: (context) => const AddContentView()));
 }
 
 class _HomeScreenState extends State<HomeScreenContent> {
@@ -51,7 +54,7 @@ class _HomeScreenState extends State<HomeScreenContent> {
                       decoration: BoxDecoration(
                         // border: Border.all(width: 2),
                         color: Colors.white,
-                        borderRadius: BorderRadius.all(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(100),
                         ),
                       ),
@@ -89,10 +92,10 @@ class _HomeScreenState extends State<HomeScreenContent> {
                     ),
                   ]),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Row(
                   children: [
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
                     Container(
                       height: 60,
                       width: 250,
@@ -101,6 +104,7 @@ class _HomeScreenState extends State<HomeScreenContent> {
                         border: Border.all(color: Colors.red, width: 3),
                         color: Colors.white,
                       ),
+<<<<<<< HEAD
                       child: Center(
                         child: FutureBuilder<String>(
                             //  future:
@@ -110,9 +114,15 @@ class _HomeScreenState extends State<HomeScreenContent> {
                               style: TextStyle(fontSize: 19),
                               textAlign: TextAlign.left);
                         }),
+=======
+                      child: const Center(
+                        child: Text("4 tasks remaining",
+                            style: TextStyle(fontSize: 19),
+                            textAlign: TextAlign.left),
+>>>>>>> gridlist
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 40,
                       width: 40,
                     ),
@@ -149,22 +159,24 @@ class _HomeScreenState extends State<HomeScreenContent> {
                           color: Colors.white),
                       child: Column(children: [
                         Container(
-                          width: size.width,
-                          height: size.height * 0.50,
-                          //   decoration: BoxDecoration(border: Border.all(width: 2)),
-                          child: FutureBuilder<List<User>>(
+                            alignment: Alignment.topCenter,
+                            width: size.width,
+                            height: size.height * 0.50,
+                            //   decoration: BoxDecoration(border: Border.all(width: 2)),
+                            child: FutureBuilder<List<User>>(
                               future: DatabaseHelper.instance.getTasks(),
                               builder: (BuildContext context,
                                   AsyncSnapshot<List<User>> snapshot) {
                                 if (!snapshot.hasData) {
-                                  return Center(
+                                  return const Center(
                                     child: Text(' Loading'),
                                   );
                                 }
                                 return snapshot.data!.isEmpty
-                                    ? Center(
+                                    ? const Center(
                                         child: Text('No item'),
                                       )
+<<<<<<< HEAD
                                     : SizedBox(
                                         height: 500,
                                         width: size.width,
@@ -301,6 +313,164 @@ class _HomeScreenState extends State<HomeScreenContent> {
                                       );
                               }),
                         ),
+=======
+                                    : GridView.count(
+                                        crossAxisCount: 2,
+                                        mainAxisSpacing: 15,
+                                        crossAxisSpacing: 15,
+                                        padding: const EdgeInsets.all(15),
+                                        children: snapshot.data!.map((item) {
+                                          return Container(
+                                              decoration: BoxDecoration(
+                                                color: const Color.fromARGB(
+                                                    255, 32, 214, 255),
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                              ),
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    //  decoration: BoxDecoration(
+                                                    //  border: Border.all(
+                                                    //    color: Colors.red,
+                                                    //   width: 1)),
+                                                    height: 135,
+                                                    width: 190,
+
+                                                    child: Column(
+                                                      children: [
+                                                        const SizedBox(
+                                                            height: 20),
+                                                        Container(
+                                                          margin: EdgeInsets
+                                                              .fromLTRB(
+                                                                  20, 0, 20, 0),
+                                                          child: Text(
+                                                            item.name,
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style:
+                                                                const TextStyle(
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      255,
+                                                                      255,
+                                                                      255),
+                                                              fontSize: 20,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                            height: 10),
+                                                        Align(
+                                                          alignment: Alignment
+                                                              .centerLeft,
+                                                          child: Container(
+                                                            width: 200,
+                                                            margin: EdgeInsets
+                                                                .fromLTRB(10, 0,
+                                                                    0, 0),
+                                                            child: Text(
+                                                              item.desc,
+                                                              style:
+                                                                  const TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 16,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w300,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    //    decoration: BoxDecoration(
+                                                    //        border: Border.all(
+                                                    //            color: Colors.red,
+                                                    //           width: 1)),
+                                                    height: 40,
+                                                    width: 200,
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        IconButton(
+                                                          icon: Icon(
+                                                            Icons.delete,
+                                                            size: 30,
+                                                            color: Colors.red,
+                                                          ),
+                                                          onPressed: () {
+                                                            setState(() {
+                                                              DatabaseHelper
+                                                                  .instance
+                                                                  .remove(
+                                                                      item.id!);
+                                                            });
+                                                          },
+                                                        ),
+                                                        IconButton(
+                                                          icon: Icon(
+                                                            Icons.edit,
+                                                            size: 30,
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    62,
+                                                                    25,
+                                                                    228),
+                                                          ),
+                                                          onPressed: () {
+                                                            Navigator.pushNamed(
+                                                                    context,
+                                                                    '/add',
+                                                                    arguments:
+                                                                        item) //Test
+                                                                .then((value) =>
+                                                                    setState(
+                                                                        () {}));
+                                                          },
+                                                        ),
+                                                        IconButton(
+                                                          icon: Icon(
+                                                            Icons.done,
+                                                            size: 35,
+                                                            color: Colors.green,
+                                                          ),
+                                                          onPressed: () {
+                                                            setState(() {
+                                                              DatabaseHelper
+                                                                  .instance
+                                                                  .remove(
+                                                                      item.id!);
+                                                            });
+                                                          },
+                                                        )
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              ));
+                                        }).toList(),
+                                      );
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              },
+                            )),
+>>>>>>> gridlist
                       ]),
                     ),
                   ),
@@ -309,3 +479,5 @@ class _HomeScreenState extends State<HomeScreenContent> {
             )));
   }
 }
+
+// snapshot.data!map(item)
