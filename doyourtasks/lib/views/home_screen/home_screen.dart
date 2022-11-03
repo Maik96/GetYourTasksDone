@@ -2,11 +2,6 @@ import 'package:doyourtasks/database/database_helper.dart';
 import 'package:doyourtasks/database/user.dart';
 import 'package:doyourtasks/views/add_screen/add_screen.dart';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:sqflite/sqlite_api.dart';
-=======
->>>>>>> gridlist
 
 class HomeScreenContent extends StatefulWidget {
   HomeScreenContent({Key? key}) : super(key: key);
@@ -29,7 +24,6 @@ class _HomeScreenState extends State<HomeScreenContent> {
 
   String name = "Hi Maik";
   String afternoonText = "Good afternoon";
-  String anzahl = DatabaseHelper.instance.getCount.toString();
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +35,10 @@ class _HomeScreenState extends State<HomeScreenContent> {
                 const BoxDecoration(color: Color.fromARGB(250, 20, 98, 233)),
             child: Column(
               children: [
-                SizedBox(width: size.width, height: 80),
+                SizedBox(width: size.width, height: 60),
                 Container(
                   width: size.width,
-                  height: size.height * 0.2,
+                  height: size.height * 0.20,
                   // decoration: BoxDecoration(border: Border.all(width: 2)),
                   child: Row(children: [
                     const SizedBox(
@@ -67,7 +61,7 @@ class _HomeScreenState extends State<HomeScreenContent> {
                     Container(
                       // decoration: BoxDecoration(border: Border.all(width: 2)),
                       width: 180,
-                      height: 120,
+                      height: 80,
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -92,7 +86,6 @@ class _HomeScreenState extends State<HomeScreenContent> {
                     ),
                   ]),
                 ),
-                const SizedBox(height: 10),
                 Row(
                   children: [
                     const SizedBox(width: 20),
@@ -101,25 +94,13 @@ class _HomeScreenState extends State<HomeScreenContent> {
                       width: 250,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: Colors.red, width: 3),
+                        //    border: Border.all(color: Colors.red, width: 3),
                         color: Colors.white,
                       ),
-<<<<<<< HEAD
-                      child: Center(
-                        child: FutureBuilder<String>(
-                            //  future:
-                            //     DatabaseHelper.instance.getCount().toString(),
-                            builder: (context, AsyncSnapshot) {
-                          return Text(anzahl + "tasks remaining",
-                              style: TextStyle(fontSize: 19),
-                              textAlign: TextAlign.left);
-                        }),
-=======
                       child: const Center(
                         child: Text("4 tasks remaining",
                             style: TextStyle(fontSize: 19),
                             textAlign: TextAlign.left),
->>>>>>> gridlist
                       ),
                     ),
                     const SizedBox(
@@ -136,9 +117,11 @@ class _HomeScreenState extends State<HomeScreenContent> {
                         color: Colors.white,
                         onPressed: () {
                           Navigator.pushNamed(context, '/add',
-                                  arguments:
-                                      User(name: '', desc: '', done: true))
-                              .then((value) => setState(() {}));
+                              arguments: User(
+                                name: '',
+                                desc: '',
+                                done: true,
+                              )).then((value) => setState(() {}));
                         },
                       ),
                     ),
@@ -148,7 +131,7 @@ class _HomeScreenState extends State<HomeScreenContent> {
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Container(
-                      height: size.height * 0.55,
+                      height: size.height * 0.60,
                       width: size.width,
                       alignment: Alignment.topCenter,
                       decoration: const BoxDecoration(
@@ -156,12 +139,12 @@ class _HomeScreenState extends State<HomeScreenContent> {
                             topRight: Radius.circular(30),
                             topLeft: Radius.circular(30),
                           ),
-                          color: Colors.white),
+                          color: Color.fromARGB(255, 234, 234, 234)),
                       child: Column(children: [
                         Container(
                             alignment: Alignment.topCenter,
                             width: size.width,
-                            height: size.height * 0.50,
+                            height: size.height * 0.599,
                             //   decoration: BoxDecoration(border: Border.all(width: 2)),
                             child: FutureBuilder<List<User>>(
                               future: DatabaseHelper.instance.getTasks(),
@@ -173,217 +156,102 @@ class _HomeScreenState extends State<HomeScreenContent> {
                                   );
                                 }
                                 return snapshot.data!.isEmpty
-                                    ? const Center(
-                                        child: Text('No item'),
+                                    ? Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: const [
+                                          Icon(
+                                            Icons.emoji_emotions_outlined,
+                                            size: 30,
+                                          ),
+                                          SizedBox(height: 10),
+                                          Text(
+                                            'Your tasks will appear here',
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                fontFamily: 'Roboto'),
+                                          ),
+                                        ],
                                       )
-<<<<<<< HEAD
-                                    : SizedBox(
-                                        height: 500,
-                                        width: size.width,
-                                        child: ListView(
-                                          shrinkWrap: true,
-                                          padding:
-                                              EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                          children: snapshot.data!.map((item) {
-                                            return Container(
-                                              height: 110,
-                                              width: 150,
-                                              decoration: BoxDecoration(
-                                                color: Color.fromARGB(
-                                                    255, 123, 196, 255),
-                                                borderRadius:
-                                                    BorderRadius.circular(30),
-                                              ),
-                                              child: Flexible(
-                                                child: Column(
-                                                  children: [
-                                                    Row(children: [
-                                                      Container(
-                                                        width: 130,
-                                                        child: Column(
-                                                          children: [
-                                                            ElevatedButton(
-                                                              onPressed: () {
-                                                                Navigator.pushNamed(
-                                                                        context,
-                                                                        '/add',
-                                                                        arguments:
-                                                                            item)
-                                                                    .then((value) =>
-                                                                        setState(
-                                                                            () {}));
-                                                              },
-                                                              child:
-                                                                  Text('Edit'),
-                                                              style: ElevatedButton.styleFrom(
-                                                                  fixedSize:
-                                                                      Size(105,
-                                                                          15),
-                                                                  primary: Colors
-                                                                      .blueAccent),
-                                                            ),
-                                                            ElevatedButton(
-                                                              onPressed: () {
-                                                                setState(() {
-                                                                  DatabaseHelper
-                                                                      .instance
-                                                                      .remove(item
-                                                                          .id!);
-                                                                });
-                                                              },
-                                                              child: Text(
-                                                                  "Delete"),
-                                                              style: ElevatedButton
-                                                                  .styleFrom(
-                                                                      fixedSize:
-                                                                          Size(
-                                                                              105,
-                                                                              15),
-                                                                      primary:
-                                                                          Colors
-                                                                              .red),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Column(
-                                                        children: [
-                                                          Text(
-                                                            item.name,
-                                                            style: TextStyle(
-                                                              color: item.done
-                                                                  ? Colors.grey
-                                                                  : null,
-                                                              decoration: item
-                                                                      .done
-                                                                  ? TextDecoration
-                                                                      .lineThrough
-                                                                  : null,
-                                                            ),
-                                                          ),
-                                                          Text(item.desc),
-                                                        ],
-                                                      ),
-                                                      Expanded(
-                                                        child: CheckboxListTile(
-                                                          title: Flexible(
-                                                            child: Text(
-                                                              "",
-                                                              style: TextStyle(
-                                                                color: item.done
-                                                                    ? Colors
-                                                                        .grey
-                                                                    : null,
-                                                                decoration: item
-                                                                        .done
-                                                                    ? TextDecoration
-                                                                        .lineThrough
-                                                                    : null,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          value: item.done,
-                                                          onChanged:
-                                                              (newValue) {
-                                                            setState(() {
-                                                              DatabaseHelper
-                                                                  .instance
-                                                                  .update(item
-                                                                      .copyWith(
-                                                                          done:
-                                                                              newValue));
-                                                            });
-                                                          },
-                                                        ),
-                                                      ),
-                                                    ]),
-                                                    Container(
-                                                      alignment: Alignment
-                                                          .bottomCenter,
-                                                      height: 14,
-                                                      decoration: BoxDecoration(
-                                                          color: Colors.white),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            );
-                                          }).toList(),
-                                        ),
-                                      );
-                              }),
-                        ),
-=======
                                     : GridView.count(
                                         crossAxisCount: 2,
-                                        mainAxisSpacing: 15,
+                                        mainAxisSpacing: 25,
                                         crossAxisSpacing: 15,
-                                        padding: const EdgeInsets.all(15),
+                                        padding: const EdgeInsets.fromLTRB(
+                                            15, 30, 15, 15),
                                         children: snapshot.data!.map((item) {
                                           return Container(
+                                              width: 200,
+                                              height: 200,
                                               decoration: BoxDecoration(
-                                                color: const Color.fromARGB(
-                                                    255, 32, 214, 255),
+                                                color: Color.fromARGB(
+                                                    249, 255, 255, 255),
                                                 borderRadius:
-                                                    BorderRadius.circular(30),
+                                                    BorderRadius.circular(37),
                                               ),
                                               child: Column(
                                                 children: [
                                                   Container(
-                                                    //  decoration: BoxDecoration(
-                                                    //  border: Border.all(
-                                                    //    color: Colors.red,
-                                                    //   width: 1)),
-                                                    height: 135,
-                                                    width: 190,
-
+                                                    //      decoration: BoxDecoration(
+                                                    //        border: Border.all(
+                                                    //          color: Colors.red,
+                                                    //        width: 1)),
+                                                    height: 125,
+                                                    width: 200,
                                                     child: Column(
                                                       children: [
                                                         const SizedBox(
-                                                            height: 20),
+                                                            height: 10),
                                                         Container(
+                                                          height: 25,
+                                                          width: 200,
                                                           margin: EdgeInsets
                                                               .fromLTRB(
-                                                                  20, 0, 20, 0),
+                                                                  17, 10, 5, 0),
                                                           child: Text(
                                                             item.name,
-                                                            textAlign: TextAlign
-                                                                .center,
+                                                            textAlign:
+                                                                TextAlign.start,
                                                             style:
                                                                 const TextStyle(
                                                               color: Color
-                                                                  .fromARGB(
-                                                                      255,
-                                                                      255,
-                                                                      255,
-                                                                      255),
+                                                                  .fromARGB(255,
+                                                                      0, 0, 0),
                                                               fontSize: 20,
                                                               fontWeight:
                                                                   FontWeight
-                                                                      .bold,
+                                                                      .w800,
+                                                              fontFamily:
+                                                                  'Roboto',
                                                             ),
                                                           ),
                                                         ),
                                                         const SizedBox(
-                                                            height: 10),
+                                                            height: 7),
                                                         Align(
                                                           alignment: Alignment
                                                               .centerLeft,
                                                           child: Container(
                                                             width: 200,
                                                             margin: EdgeInsets
-                                                                .fromLTRB(10, 0,
-                                                                    0, 0),
+                                                                .fromLTRB(17, 0,
+                                                                    10, 15),
                                                             child: Text(
                                                               item.desc,
                                                               style:
                                                                   const TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 16,
+                                                                color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        132,
+                                                                        132,
+                                                                        132),
+                                                                fontSize: 14,
                                                                 fontWeight:
                                                                     FontWeight
-                                                                        .w300,
+                                                                        .w400,
+                                                                fontFamily:
+                                                                    'Roboto',
                                                               ),
                                                             ),
                                                           ),
@@ -392,11 +260,23 @@ class _HomeScreenState extends State<HomeScreenContent> {
                                                     ),
                                                   ),
                                                   Container(
-                                                    //    decoration: BoxDecoration(
-                                                    //        border: Border.all(
-                                                    //            color: Colors.red,
-                                                    //           width: 1)),
-                                                    height: 40,
+                                                    decoration: BoxDecoration(
+                                                        color: Color.fromARGB(
+                                                            255, 255, 255, 255),
+                                                        borderRadius: BorderRadius.only(
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    0),
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    0),
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    30),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    30))),
+                                                    height: 54.5,
                                                     width: 200,
                                                     child: Row(
                                                       mainAxisAlignment:
@@ -404,13 +284,18 @@ class _HomeScreenState extends State<HomeScreenContent> {
                                                               .center,
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
-                                                              .start,
+                                                              .end,
                                                       children: [
                                                         IconButton(
                                                           icon: Icon(
                                                             Icons.delete,
                                                             size: 30,
-                                                            color: Colors.red,
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    1,
+                                                                    1,
+                                                                    1),
                                                           ),
                                                           onPressed: () {
                                                             setState(() {
@@ -428,9 +313,9 @@ class _HomeScreenState extends State<HomeScreenContent> {
                                                             color:
                                                                 Color.fromARGB(
                                                                     255,
-                                                                    62,
-                                                                    25,
-                                                                    228),
+                                                                    29,
+                                                                    206,
+                                                                    255),
                                                           ),
                                                           onPressed: () {
                                                             Navigator.pushNamed(
@@ -447,7 +332,12 @@ class _HomeScreenState extends State<HomeScreenContent> {
                                                           icon: Icon(
                                                             Icons.done,
                                                             size: 35,
-                                                            color: Colors.green,
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    48,
+                                                                    121,
+                                                                    255),
                                                           ),
                                                           onPressed: () {
                                                             setState(() {
@@ -470,7 +360,6 @@ class _HomeScreenState extends State<HomeScreenContent> {
                                 );
                               },
                             )),
->>>>>>> gridlist
                       ]),
                     ),
                   ),
@@ -481,3 +370,5 @@ class _HomeScreenState extends State<HomeScreenContent> {
 }
 
 // snapshot.data!map(item)
+
+

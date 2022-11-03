@@ -26,6 +26,7 @@ class DatabaseHelper {
     await db.execute('''
       CREATE TABLE getyourtasksdone(
         id INTEGER PRIMARY KEY,
+        username TEXT,
         name TEXT,
         desc TEXT,
         done INTEGER

@@ -18,6 +18,8 @@ class WelcomeScreenContent extends StatelessWidget {
     final String InfoTextThree =
         "All your tasks will always remain on your device only. We promise!";
 
+    TextEditingController usernameController = TextEditingController(text: '');
+
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Container(
@@ -64,13 +66,15 @@ class WelcomeScreenContent extends StatelessWidget {
                 height: 65,
                 width: 370,
                 child: TextField(
+                  controller: usernameController,
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: const BorderSide(
+                            width: 0, style: BorderStyle.none)),
+                    fillColor: Color.fromARGB(255, 234, 234, 234),
                     hintText: "What's your name?",
-                    //  enabledBorder: OutlineInputBorder(
-                    //     borderRadius: BorderRadius.circular(15),
-                    //      borderSide: const BorderSide(color: Colors.red)),
                   ),
                 ),
               ),
@@ -121,6 +125,7 @@ class WelcomeScreenContent extends StatelessWidget {
                             _navigateToNextScreen(context);
                           },
                           style: ElevatedButton.styleFrom(
+                              elevation: 0,
                               primary: const Color.fromARGB(255, 255, 255, 255),
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 80, vertical: 23),
