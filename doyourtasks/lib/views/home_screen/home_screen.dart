@@ -1,10 +1,12 @@
+import 'dart:convert';
 import 'package:doyourtasks/database/database_helper.dart';
 import 'package:doyourtasks/database/user.dart';
 import 'package:doyourtasks/views/add_screen/add_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:sqflite/sqlite_api.dart';
 
 class HomeScreenContent extends StatefulWidget {
-  HomeScreenContent({Key? key}) : super(key: key);
+  const HomeScreenContent({Key? key}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -16,14 +18,24 @@ void _navigateToAddScreen(BuildContext context) {
 }
 
 class _HomeScreenState extends State<HomeScreenContent> {
-  void _showSnackBar(BuildContext context, String text) {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text(text)));
-  }
-
   String name = "Hi Maik";
   String afternoonText = "Good afternoon";
+
+  String dateFormatter(DateTime date) {
+    dynamic dayData =
+        '{ "1" : "Mon", "2" : "Tue", "3" : "Wed", "4" : "Thur", "5" : "Fri", "6" : "Sat", "7" : "Sun" }';
+
+    dynamic monthData =
+        '{ "1" : "Jan", "2" : "Feb", "3" : "Mar", "4" : "Apr", "5" : "May", "6" : "June", "7" : "Jul", "8" : "Aug", "9" : "Sep", "10" : "Oct", "11" : "Nov", "12" : "Dec" }';
+
+    return json.decode(dayData)['${date.weekday}'] +
+        ", " +
+        date.day.toString() +
+        " " +
+        json.decode(monthData)['${date.month}'] +
+        " " +
+        date.year.toString();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +57,10 @@ class _HomeScreenState extends State<HomeScreenContent> {
                       width: 40,
                     ),
                     Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         // border: Border.all(width: 2),
                         color: Colors.white,
-                        borderRadius: const BorderRadius.all(
+                        borderRadius: BorderRadius.all(
                           Radius.circular(100),
                         ),
                       ),
@@ -58,6 +70,7 @@ class _HomeScreenState extends State<HomeScreenContent> {
                           Image.asset('assets/images/RockYourTasksRound.png'),
                     ),
                     // Wird nacher gefuellt mit einem Icon
+                    // ignore: sized_box_for_whitespace
                     Container(
                       // decoration: BoxDecoration(border: Border.all(width: 2)),
                       width: 180,
@@ -97,16 +110,17 @@ class _HomeScreenState extends State<HomeScreenContent> {
                         //    border: Border.all(color: Colors.red, width: 3),
                         color: Colors.white,
                       ),
-                      child: const Center(
-                        child: Text("4 tasks remaining",
-                            style: TextStyle(fontSize: 19),
-                            textAlign: TextAlign.left),
-                      ),
+                      child: Center(
+                          child: Text(
+                        dateFormatter(DateTime.now()),
+                        style: TextStyle(fontSize: 18),
+                      )),
                     ),
                     const SizedBox(
                       height: 40,
                       width: 40,
                     ),
+                    // ignore: sized_box_for_whitespace
                     Container(
                       height: 80,
                       child: IconButton(
@@ -184,7 +198,7 @@ class _HomeScreenState extends State<HomeScreenContent> {
                                               width: 200,
                                               height: 200,
                                               decoration: BoxDecoration(
-                                                color: Color.fromARGB(
+                                                color: const Color.fromARGB(
                                                     249, 255, 255, 255),
                                                 borderRadius:
                                                     BorderRadius.circular(37),
@@ -205,8 +219,9 @@ class _HomeScreenState extends State<HomeScreenContent> {
                                                         Container(
                                                           height: 25,
                                                           width: 200,
-                                                          margin: EdgeInsets
-                                                              .fromLTRB(
+                                                          margin:
+                                                              const EdgeInsets
+                                                                      .fromLTRB(
                                                                   17, 10, 5, 0),
                                                           child: Text(
                                                             item.name,
@@ -233,9 +248,13 @@ class _HomeScreenState extends State<HomeScreenContent> {
                                                               .centerLeft,
                                                           child: Container(
                                                             width: 200,
-                                                            margin: EdgeInsets
-                                                                .fromLTRB(17, 0,
-                                                                    10, 15),
+                                                            margin:
+                                                                const EdgeInsets
+                                                                        .fromLTRB(
+                                                                    17,
+                                                                    0,
+                                                                    10,
+                                                                    15),
                                                             child: Text(
                                                               item.desc,
                                                               style:
@@ -260,7 +279,7 @@ class _HomeScreenState extends State<HomeScreenContent> {
                                                     ),
                                                   ),
                                                   Container(
-                                                    decoration: BoxDecoration(
+                                                    decoration: const BoxDecoration(
                                                         color: Color.fromARGB(
                                                             255, 255, 255, 255),
                                                         borderRadius: BorderRadius.only(
@@ -287,7 +306,7 @@ class _HomeScreenState extends State<HomeScreenContent> {
                                                               .end,
                                                       children: [
                                                         IconButton(
-                                                          icon: Icon(
+                                                          icon: const Icon(
                                                             Icons.delete,
                                                             size: 30,
                                                             color:
@@ -307,7 +326,7 @@ class _HomeScreenState extends State<HomeScreenContent> {
                                                           },
                                                         ),
                                                         IconButton(
-                                                          icon: Icon(
+                                                          icon: const Icon(
                                                             Icons.edit,
                                                             size: 30,
                                                             color:
@@ -322,14 +341,14 @@ class _HomeScreenState extends State<HomeScreenContent> {
                                                                     context,
                                                                     '/add',
                                                                     arguments:
-                                                                        item) //Test
+                                                                        item)
                                                                 .then((value) =>
                                                                     setState(
                                                                         () {}));
                                                           },
                                                         ),
                                                         IconButton(
-                                                          icon: Icon(
+                                                          icon: const Icon(
                                                             Icons.done,
                                                             size: 35,
                                                             color:
@@ -347,7 +366,7 @@ class _HomeScreenState extends State<HomeScreenContent> {
                                                                       item.id!);
                                                             });
                                                           },
-                                                        )
+                                                        ),
                                                       ],
                                                     ),
                                                   )
@@ -355,9 +374,6 @@ class _HomeScreenState extends State<HomeScreenContent> {
                                               ));
                                         }).toList(),
                                       );
-                                return const Center(
-                                  child: CircularProgressIndicator(),
-                                );
                               },
                             )),
                       ]),
@@ -368,7 +384,3 @@ class _HomeScreenState extends State<HomeScreenContent> {
             )));
   }
 }
-
-// snapshot.data!map(item)
-
-

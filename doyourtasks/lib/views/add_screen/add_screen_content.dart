@@ -25,7 +25,7 @@ class _AddScreenContentState extends State<AddScreenContent> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final editedTaskItem = ModalRoute.of(context)!.settings.arguments as User;
-    bool inEditMode = editedTaskItem.name != '';
+    bool inEditMode = editedTaskItem.name != '' && editedTaskItem.desc != '';
 
     if (inEditMode) {
       nameController.text = editedTaskItem.name;
@@ -150,30 +150,21 @@ class _AddScreenContentState extends State<AddScreenContent> {
                       const SizedBox(width: 20),
                       ElevatedButton(
                         onPressed: () async {
-                          if (nameController.text.isNotEmpty) {
-                            if (inEditMode) {
-                              await DatabaseHelper.instance.update(User(
-                                name: nameController.text,
-                                desc: descController.text,
-                              ));
-                            } else {
-                              await DatabaseHelper.instance.add(User(
-                                name: nameController.text,
-                                desc: descController.text,
-                              ));
-                            }
-
-                            nameController.clear();
-                            descController.clear();
-                            Navigator.of(context).pop();
+                          if (inEditMode) {
+                            await DatabaseHelper.instance.update(User(
+                              name: nameController.text,
+                              desc: descController.text,
+                            ));
                           } else {
-                            SnackBar(
-                              behavior: SnackBarBehavior.floating,
-                              content: Container(
-                                child: const Text("Error"),
-                              ),
-                            );
+                            await DatabaseHelper.instance.add(User(
+                              name: nameController.text,
+                              desc: descController.text,
+                            ));
                           }
+
+                          nameController.clear();
+                          descController.clear();
+                          Navigator.of(context).pop();
                         },
                         child: const Text("Done",
                             style: TextStyle(

@@ -60,12 +60,4 @@ class DatabaseHelper {
     return await db.update('getyourtasksdone', item.toMap(),
         where: 'id = ?', whereArgs: [item.id]);
   }
-
-  Future<int?> getCount() async {
-    Database db = await instance.database;
-    var x = await db.rawQuery('SELECT COUNT(*) FROM getyourtasksdone');
-    int? count = Sqflite.firstIntValue(x);
-    print(count);
-    return count;
-  }
 }
