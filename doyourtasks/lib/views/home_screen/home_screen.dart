@@ -327,28 +327,6 @@ class _HomeScreenState extends State<HomeScreenContent> {
                                                         ),
                                                         IconButton(
                                                           icon: const Icon(
-                                                            Icons.edit,
-                                                            size: 30,
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    29,
-                                                                    206,
-                                                                    255),
-                                                          ),
-                                                          onPressed: () {
-                                                            Navigator.pushNamed(
-                                                                    context,
-                                                                    '/add',
-                                                                    arguments:
-                                                                        item)
-                                                                .then((value) =>
-                                                                    setState(
-                                                                        () {}));
-                                                          },
-                                                        ),
-                                                        IconButton(
-                                                          icon: const Icon(
                                                             Icons.done,
                                                             size: 35,
                                                             color:

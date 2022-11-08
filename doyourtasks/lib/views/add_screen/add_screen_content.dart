@@ -1,5 +1,7 @@
 import 'package:doyourtasks/database/database_helper.dart';
 import 'package:doyourtasks/database/user.dart';
+import 'package:doyourtasks/snippets/factsone.dart';
+import 'package:doyourtasks/snippets/factstwo.dart';
 
 import 'package:flutter/material.dart';
 
@@ -61,18 +63,18 @@ class _AddScreenContentState extends State<AddScreenContent> {
                         ),
                         const SizedBox(height: 7),
                         Row(
-                          children: [
-                            const Text("Stop forgetting your tasks",
+                          children: const [
+                            Text("Stop forgetting your tasks",
                                 style: TextStyle(
                                   color: Color.fromARGB(255, 133, 133, 133),
                                   fontSize: 18,
                                 )),
                             SizedBox(width: 10),
-                            const Icon(
+                            Icon(
                               Icons.emoji_emotions_outlined,
                               size: 30,
                             ),
-                            const SizedBox(height: 10),
+                            SizedBox(height: 10),
                           ],
                         ),
                       ],
@@ -150,21 +152,23 @@ class _AddScreenContentState extends State<AddScreenContent> {
                       const SizedBox(width: 20),
                       ElevatedButton(
                         onPressed: () async {
-                          if (inEditMode) {
-                            await DatabaseHelper.instance.update(User(
-                              name: nameController.text,
-                              desc: descController.text,
-                            ));
-                          } else {
-                            await DatabaseHelper.instance.add(User(
-                              name: nameController.text,
-                              desc: descController.text,
-                            ));
-                          }
+                          if (nameController.text.isNotEmpty) {
+                            if (inEditMode) {
+                              await DatabaseHelper.instance.update(User(
+                                name: nameController.text,
+                                desc: descController.text,
+                              ));
+                            } else {
+                              await DatabaseHelper.instance.add(User(
+                                name: nameController.text,
+                                desc: descController.text,
+                              ));
+                            }
 
-                          nameController.clear();
-                          descController.clear();
-                          Navigator.of(context).pop();
+                            nameController.clear();
+                            descController.clear();
+                            Navigator.of(context).pop();
+                          }
                         },
                         child: const Text("Done",
                             style: TextStyle(
@@ -179,7 +183,7 @@ class _AddScreenContentState extends State<AddScreenContent> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 50),
+                  const SizedBox(height: 30),
                   Container(
                     alignment: Alignment.centerLeft,
                     margin: const EdgeInsets.only(left: 30),
@@ -191,27 +195,13 @@ class _AddScreenContentState extends State<AddScreenContent> {
                           fontFamily: 'Roboto'),
                     ),
                   ),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        width: 180,
-                        height: 180,
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(249, 255, 255, 255),
-                          borderRadius: BorderRadius.circular(37),
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      Container(
-                        width: 180,
-                        height: 180,
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(249, 255, 255, 255),
-                          borderRadius: BorderRadius.circular(37),
-                        ),
-                      )
+                      FactsInfoOne(),
+                      SizedBox(width: 20),
+                      FactsTwo(),
                     ],
                   ),
                 ]),
