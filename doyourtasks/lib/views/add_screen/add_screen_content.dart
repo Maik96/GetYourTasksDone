@@ -153,7 +153,8 @@ class _AddScreenContentState extends State<AddScreenContent> {
                       ElevatedButton(
                         onPressed: () async {
                           if (nameController.text.isNotEmpty &&
-                              !nameController.text.startsWith(" ")) {
+                              nameController.text != " " &&
+                              nameController.text != "  ") {
                             if (inEditMode) {
                               await DatabaseHelper.instance.update(User(
                                 name: nameController.text,
