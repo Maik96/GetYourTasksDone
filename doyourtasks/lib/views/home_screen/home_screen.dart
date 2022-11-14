@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:doyourtasks/database/database_helper.dart';
 import 'package:doyourtasks/database/user.dart';
 import 'package:doyourtasks/views/add_screen/add_screen.dart';
+import 'package:doyourtasks/views/splash/splash.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqlite_api.dart';
 
@@ -131,6 +133,7 @@ class _HomeScreenState extends State<HomeScreenContent> {
                         color: Colors.white,
                         onPressed: () {
                           Navigator.pushNamed(context, '/add',
+  
                               arguments: User(
                                 name: '',
                                 desc: '',
