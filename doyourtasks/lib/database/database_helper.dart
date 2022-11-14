@@ -44,6 +44,11 @@ class DatabaseHelper {
     return taskList;
   }
 
+  Future<int> addUserName(User item) async {
+    Database db = await instance.database;
+    return await db.insert('getyourtasksdone', item.toMap());
+  }
+
   Future<int> add(User item) async {
     Database db = await instance.database;
     return await db.insert('getyourtasksdone', item.toMap());

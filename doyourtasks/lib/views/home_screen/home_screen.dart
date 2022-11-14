@@ -133,7 +133,6 @@ class _HomeScreenState extends State<HomeScreenContent> {
                         color: Colors.white,
                         onPressed: () {
                           Navigator.pushNamed(context, '/add',
-  
                               arguments: User(
                                 name: '',
                                 desc: '',
