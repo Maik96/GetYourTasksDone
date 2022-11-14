@@ -152,7 +152,8 @@ class _AddScreenContentState extends State<AddScreenContent> {
                       const SizedBox(width: 20),
                       ElevatedButton(
                         onPressed: () async {
-                          if (nameController.text.isNotEmpty) {
+                          if (nameController.text.isNotEmpty &&
+                              !nameController.text.startsWith(" ")) {
                             if (inEditMode) {
                               await DatabaseHelper.instance.update(User(
                                 name: nameController.text,
