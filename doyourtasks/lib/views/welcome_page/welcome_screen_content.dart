@@ -47,13 +47,13 @@ class WelcomeScreenContent extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [
                           Text(
-                            "Introduce",
+                            "Hi ",
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 60,
                                 fontWeight: FontWeight.bold),
                           ),
-                          Text("yourself",
+                          Text("there",
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 60,
