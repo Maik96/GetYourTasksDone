@@ -1,11 +1,10 @@
+import 'package:doyourtasks/assets/variables/variables.dart';
 import 'package:flutter/material.dart';
 
 class FactsInfoOne extends StatelessWidget {
   FactsInfoOne({
     Key? key,
   }) : super(key: key);
-
-  final String facttextone = "Get it off your mind. Don't miss any task again.";
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,7 @@ class FactsInfoOne extends StatelessWidget {
                     )),
                 const SizedBox(height: 10),
                 Text(
-                  facttextone,
+                  factTextOne,
                   // textAlign: TextAlign.left,
                   style: const TextStyle(),
                 ),

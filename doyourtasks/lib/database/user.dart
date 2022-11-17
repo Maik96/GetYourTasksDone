@@ -2,12 +2,14 @@
 import 'dart:convert';
 
 class User {
+  late String? username;
   final int? id;
   final String name;
   final String desc;
   final bool done;
 
   User({
+    this.username,
     this.id,
     required this.name,
     required this.desc,
@@ -15,12 +17,14 @@ class User {
   });
 
   User copyWith({
+    String? username,
     int? id,
     String? name,
     String? desc,
     bool? done,
   }) {
     return User(
+      username: username ?? this.username,
       id: id ?? this.id,
       name: name ?? this.name,
       desc: desc ?? this.desc,
@@ -30,6 +34,7 @@ class User {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'username': username,
       'id': id,
       'name': name,
       'desc': desc,
@@ -39,6 +44,7 @@ class User {
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
+      username: map['username'],
       id: map['id'],
       name: map['name'],
       desc: map['desc'],
@@ -52,13 +58,15 @@ class User {
       User.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'User(id: $id, name: $name, desc: $desc, done: $done)';
+  String toString() =>
+      'User(username: $username,  id: $id, name: $name, desc: $desc, done: $done)';
 
   @override
   bool operator ==(covariant User other) {
     if (identical(this, other)) return true;
 
-    return other.id == id &&
+    return other.username == username &&
+        other.id == id &&
         other.name == name &&
         other.desc == desc &&
         other.done == done;
@@ -66,5 +74,9 @@ class User {
 
   @override
   int get hashCode =>
-      id.hashCode ^ name.hashCode ^ desc.hashCode ^ done.hashCode;
+      username.hashCode ^
+      id.hashCode ^
+      name.hashCode ^
+      desc.hashCode ^
+      done.hashCode;
 }

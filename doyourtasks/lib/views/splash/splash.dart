@@ -27,7 +27,8 @@ class SplashState extends State<Splash> with AfterLayoutMixin<Splash> {
 
     if (_seen) {
       Navigator.of(context).pushReplacement(CustomPageRoute(
-        builder: (context) => const HomeScreen(),
+        builder: (context) =>
+            const WelcomeScreen(), // Muss nacher wieder geandert werden zu Hompage
       ));
     } else {
       await prefs.setBool('seen', true);

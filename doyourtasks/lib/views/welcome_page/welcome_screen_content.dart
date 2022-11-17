@@ -1,3 +1,8 @@
+// ignore_for_file: sized_box_for_whitespace
+
+import 'package:doyourtasks/assets/variables/variables.dart';
+import 'package:doyourtasks/database/database_helper.dart';
+import 'package:doyourtasks/database/user.dart';
 import 'package:doyourtasks/views/home_screen/home_screen_content.dart';
 import 'package:flutter/material.dart';
 
@@ -12,11 +17,6 @@ class WelcomeScreenContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final String InfoText =
-        "With RockYourTasks you will get your tasks done so quickly.";
-    final String InfoTextTwo = "We only ask you about your name.";
-    final String InfoTextThree =
-        "All your tasks will always remain on your device only. We promise!";
 
     TextEditingController usernameController = TextEditingController(text: '');
 
@@ -47,13 +47,13 @@ class WelcomeScreenContent extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [
                           Text(
-                            "Introduce",
+                            "Hi ",
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 60,
                                 fontWeight: FontWeight.bold),
                           ),
-                          Text("yourself",
+                          Text("there",
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 60,
@@ -73,7 +73,7 @@ class WelcomeScreenContent extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15),
                         borderSide: const BorderSide(
                             width: 0, style: BorderStyle.none)),
-                    fillColor: Color.fromARGB(255, 234, 234, 234),
+                    fillColor: const Color.fromARGB(255, 234, 234, 234),
                     hintText: "What's your name?",
                   ),
                 ),
@@ -86,22 +86,22 @@ class WelcomeScreenContent extends StatelessWidget {
                   child: Container(
                       child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: const [
                       Text(
-                        InfoText,
-                        style: const TextStyle(
+                        infoText,
+                        style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         height: 30,
                         width: 100,
                       ),
                       Text(
-                        InfoTextTwo,
-                        style: const TextStyle(fontSize: 18),
+                        infoTextTwo,
+                        style: TextStyle(fontSize: 18),
                         textAlign: TextAlign.left,
                       ),
-                      Text(InfoTextThree, style: const TextStyle(fontSize: 18)),
+                      Text(infoTextThree, style: TextStyle(fontSize: 18)),
                     ],
                   )),
                 ),
@@ -112,7 +112,7 @@ class WelcomeScreenContent extends StatelessWidget {
                   child: Container(
                       width: size.width,
                       height: size.height * 0.2,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Color.fromARGB(250, 20, 98, 233),
                         borderRadius: BorderRadius.only(
                           topRight: Radius.circular(50),
@@ -121,7 +121,13 @@ class WelcomeScreenContent extends StatelessWidget {
                       ),
                       child: Center(
                         child: ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
+                            await DatabaseHelper.instance.addUserName(User(
+                              username: usernameController.text,
+                              desc: '',
+                              name: '',
+                            ));
+
                             _navigateToNextScreen(context);
                           },
                           style: ElevatedButton.styleFrom(

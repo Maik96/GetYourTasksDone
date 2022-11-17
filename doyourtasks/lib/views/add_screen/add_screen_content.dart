@@ -31,7 +31,7 @@ class _AddScreenContentState extends State<AddScreenContent> {
 
     if (inEditMode) {
       nameController.text = editedTaskItem.name;
-      descController.text = editedTaskItem.name;
+      descController.text = editedTaskItem.desc;
     }
 
     return Scaffold(
@@ -157,9 +157,9 @@ class _AddScreenContentState extends State<AddScreenContent> {
                               nameController.text != "  ") {
                             if (inEditMode) {
                               await DatabaseHelper.instance.update(User(
-                                name: nameController.text,
-                                desc: descController.text,
-                              ));
+                                  name: nameController.text,
+                                  desc: descController.text,
+                                  id: editedTaskItem.id));
                             } else {
                               await DatabaseHelper.instance.add(User(
                                 name: nameController.text,
@@ -169,7 +169,7 @@ class _AddScreenContentState extends State<AddScreenContent> {
 
                             nameController.clear();
                             descController.clear();
-                            Navigator.of(context).pop();
+                            Navigator.pop(context);
                           }
                         },
                         child: const Text("Done",
