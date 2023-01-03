@@ -20,7 +20,7 @@ void _navigateToAddScreen(BuildContext context) {
 }
 
 class _HomeScreenState extends State<HomeScreenContent> {
-  String name = "Hi Maik";
+  String name = "Hi there";
   String afternoonText = "Good afternoon";
 
   String dateFormatter(DateTime date) {
@@ -281,22 +281,6 @@ class _HomeScreenState extends State<HomeScreenContent> {
                                                     ),
                                                   ),
                                                   Container(
-                                                    decoration: const BoxDecoration(
-                                                        color: Color.fromARGB(
-                                                            255, 255, 255, 255),
-                                                        borderRadius: BorderRadius.only(
-                                                            topLeft:
-                                                                Radius.circular(
-                                                                    0),
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    0),
-                                                            bottomLeft:
-                                                                Radius.circular(
-                                                                    30),
-                                                            bottomRight:
-                                                                Radius.circular(
-                                                                    30))),
                                                     height: 54.5,
                                                     width: 200,
                                                     child: Row(

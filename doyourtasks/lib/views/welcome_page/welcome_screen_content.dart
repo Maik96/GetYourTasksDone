@@ -3,6 +3,7 @@
 import 'package:doyourtasks/assets/variables/variables.dart';
 import 'package:doyourtasks/database/database_helper.dart';
 import 'package:doyourtasks/database/user.dart';
+import 'package:doyourtasks/snippets/example_task.dart';
 import 'package:doyourtasks/views/home_screen/home_screen_content.dart';
 import 'package:flutter/material.dart';
 
@@ -25,20 +26,21 @@ class WelcomeScreenContent extends StatelessWidget {
         body: Container(
           height: size.height,
           width: size.width,
-          decoration: const BoxDecoration(color: Colors.white),
+          decoration:
+              const BoxDecoration(color: Color.fromARGB(255, 234, 234, 234)),
           child: Column(
             children: [
               const SizedBox(height: 70),
               Container(
-                height: 130,
+                height: 120,
                 width: size.width,
                 child: Image.asset(
-                  'assets/images/RockYourTasks.png',
+                  'assets/images/logo_transparent.png',
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               Container(
-                height: 170,
+                height: 160,
                 width: size.width * 0.9,
                 child: Center(
                   child: Align(
@@ -47,13 +49,13 @@ class WelcomeScreenContent extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [
                           Text(
-                            "Hi ",
+                            "Get your",
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 60,
                                 fontWeight: FontWeight.bold),
                           ),
-                          Text("there",
+                          Text("task's done",
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 60,
@@ -62,23 +64,6 @@ class WelcomeScreenContent extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 65,
-                width: 370,
-                child: TextField(
-                  controller: usernameController,
-                  decoration: InputDecoration(
-                    filled: true,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: const BorderSide(
-                            width: 0, style: BorderStyle.none)),
-                    fillColor: const Color.fromARGB(255, 234, 234, 234),
-                    hintText: "What's your name?",
-                  ),
-                ),
-              ),
-              const SizedBox(height: 30),
               Container(
                 width: size.width * 0.9,
                 child: Align(
@@ -90,21 +75,21 @@ class WelcomeScreenContent extends StatelessWidget {
                       Text(
                         infoText,
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                            color: Color.fromARGB(255, 98, 98, 98),
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
-                        height: 30,
+                        height: 15,
                         width: 100,
                       ),
-                      Text(
-                        infoTextTwo,
-                        style: TextStyle(fontSize: 18),
-                        textAlign: TextAlign.left,
-                      ),
-                      Text(infoTextThree, style: TextStyle(fontSize: 18)),
                     ],
                   )),
                 ),
+              ),
+              SizedBox(height: 30),
+              Container(
+                child: ExampleFact(),
               ),
               Expanded(
                 child: Align(
@@ -121,13 +106,7 @@ class WelcomeScreenContent extends StatelessWidget {
                       ),
                       child: Center(
                         child: ElevatedButton(
-                          onPressed: () async {
-                            await DatabaseHelper.instance.addUserName(User(
-                              username: usernameController.text,
-                              desc: '',
-                              name: '',
-                            ));
-
+                          onPressed: () {
                             _navigateToNextScreen(context);
                           },
                           style: ElevatedButton.styleFrom(

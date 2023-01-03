@@ -26,7 +26,6 @@ class DatabaseHelper {
     await db.execute('''
       CREATE TABLE getyourtasksdone(
         id INTEGER PRIMARY KEY,
-        username TEXT,
         name TEXT,
         desc TEXT,
         done INTEGER
@@ -42,11 +41,6 @@ class DatabaseHelper {
         tasks.isNotEmpty ? tasks.map((e) => User.fromMap(e)).toList() : [];
 
     return taskList;
-  }
-
-  Future<int> addUserName(User item) async {
-    Database db = await instance.database;
-    return await db.insert('getyourtasksdone', item.toMap());
   }
 
   Future<int> add(User item) async {

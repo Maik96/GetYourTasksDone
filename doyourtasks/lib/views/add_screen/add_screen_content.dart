@@ -55,7 +55,7 @@ class _AddScreenContentState extends State<AddScreenContent> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          "New task",
+                          "New One",
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 60,
@@ -64,7 +64,7 @@ class _AddScreenContentState extends State<AddScreenContent> {
                         const SizedBox(height: 7),
                         Row(
                           children: const [
-                            Text("Stop forgetting your tasks",
+                            Text("Get it off your mind",
                                 style: TextStyle(
                                   color: Color.fromARGB(255, 133, 133, 133),
                                   fontSize: 18,
@@ -121,7 +121,7 @@ class _AddScreenContentState extends State<AddScreenContent> {
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.white,
-                        hintText: "Describe your task :)",
+                        hintText: "Describe your task",
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: const BorderSide(
