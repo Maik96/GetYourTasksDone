@@ -20,7 +20,8 @@ class WelcomeScreenContent extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     TextEditingController usernameController = TextEditingController(text: '');
-
+    print(size.width);
+    print(size.height);
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Container(
@@ -30,7 +31,7 @@ class WelcomeScreenContent extends StatelessWidget {
               const BoxDecoration(color: Color.fromARGB(255, 234, 234, 234)),
           child: Column(
             children: [
-              const SizedBox(height: 70),
+              SizedBox(height: size.height * 0.08),
               Container(
                 height: 120,
                 width: size.width,
@@ -40,25 +41,25 @@ class WelcomeScreenContent extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               Container(
-                height: 160,
+                height: size.height * 0.19,
                 width: size.width * 0.9,
                 child: Center(
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           Text(
                             "Get your",
                             style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 60,
+                                fontSize: size.height * 0.07,
                                 fontWeight: FontWeight.bold),
                           ),
                           Text("task's done",
                               style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: 60,
+                                  fontSize: size.height * 0.07,
                                   fontWeight: FontWeight.bold)),
                         ]),
                   ),
@@ -71,23 +72,19 @@ class WelcomeScreenContent extends StatelessWidget {
                   child: Container(
                       child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
                         infoText,
                         style: TextStyle(
                             color: Color.fromARGB(255, 98, 98, 98),
-                            fontSize: 20,
+                            fontSize: size.height * 0.025,
                             fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 15,
-                        width: 100,
                       ),
                     ],
                   )),
                 ),
               ),
-              SizedBox(height: 30),
+              SizedBox(height: size.height * 0.06),
               Container(
                 child: ExampleFact(),
               ),
@@ -96,7 +93,7 @@ class WelcomeScreenContent extends StatelessWidget {
                   alignment: Alignment.bottomCenter,
                   child: Container(
                       width: size.width,
-                      height: size.height * 0.2,
+                      height: size.height * 0.18,
                       decoration: const BoxDecoration(
                         color: Color.fromARGB(250, 20, 98, 233),
                         borderRadius: BorderRadius.only(

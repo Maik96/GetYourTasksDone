@@ -8,38 +8,38 @@ class ExampleFact extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
-        width: 200,
-        height: 200,
+        width: size.width * 0.43,
+        height: size.height * 0.20,
         decoration: BoxDecoration(
           color: Color.fromARGB(149, 255, 255, 255),
           borderRadius: BorderRadius.circular(37),
         ),
         child: Column(children: [
           Container(
-            height: 140,
+            height: size.height * 0.14,
             width: 200,
             // decoration: BoxDecoration(border: Border.all(width: 2)),
             child: Column(
               children: [
                 const SizedBox(height: 10),
                 Container(
-                  height: 25,
-                  width: 200,
+                  height: size.height * 0.035,
+                  width: size.width * 0.5,
                   //   decoration: BoxDecoration(border: Border.all(width: 2)),
                   margin: const EdgeInsets.fromLTRB(17, 10, 5, 0),
                   child: Text(
                     "New dog toy",
                     textAlign: TextAlign.start,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Color.fromARGB(255, 0, 0, 0),
-                      fontSize: 20,
+                      fontSize: size.height * 0.022,
                       fontWeight: FontWeight.w800,
                       fontFamily: 'Roboto',
                     ),
                   ),
                 ),
-                const SizedBox(height: 10),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Container(
@@ -47,9 +47,9 @@ class ExampleFact extends StatelessWidget {
                     margin: const EdgeInsets.fromLTRB(17, 0, 10, 15),
                     child: Text(
                       "Getting a new toy for      my dog ",
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Color.fromARGB(255, 134, 134, 134),
-                        fontSize: 14,
+                        fontSize: size.height * 0.016,
                         fontWeight: FontWeight.w400,
                         fontFamily: 'Roboto',
                       ),
@@ -60,7 +60,7 @@ class ExampleFact extends StatelessWidget {
             ),
           ),
           Container(
-            height: 50,
+            height: 40,
             width: 200,
             //     decoration: BoxDecoration(border: Border.all(width: 2)),
             child: Row(
