@@ -26,18 +26,18 @@ class FactsTwo extends StatelessWidget {
           ),
           const SizedBox(height: 5),
           Container(
-              margin: EdgeInsets.only(left: 8, right: 8),
+              margin: const EdgeInsets.only(left: 8, right: 8),
               child: Column(
-                children: [
-                  const Text("Focus",
+                children: const [
+                  Text("Focus",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
                       )),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10),
                   Text(
                     factTextTwo,
-                    style: const TextStyle(),
+                    style: TextStyle(),
                   ),
                 ],
               )),

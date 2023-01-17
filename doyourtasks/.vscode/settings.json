@@ -6,6 +6,8 @@
         "databasehandler",
         "doyourtasks",
         "einem",
+        "factsone",
+        "factstwo",
         "facttexttwo",
         "gefuellt",
         "getyourtasksdone",
@@ -15,6 +17,7 @@
         "prefs",
         "Roboto",
         "sqflite",
+        "wieder",
         "Wird"
     ],
     "cSpell.ignoreWords": [

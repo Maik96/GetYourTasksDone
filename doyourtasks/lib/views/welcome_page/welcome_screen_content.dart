@@ -19,9 +19,8 @@ class WelcomeScreenContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    TextEditingController usernameController = TextEditingController(text: '');
-    print(size.width);
-    print(size.height);
+    print(size.width); // Fuer Hilfe bei Implementierung von Responsive
+    print(size.height); // Fuer Hilfe bei Implementierung von Responsive
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Container(

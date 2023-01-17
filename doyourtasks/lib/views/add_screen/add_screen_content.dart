@@ -45,6 +45,7 @@ class _AddScreenContentState extends State<AddScreenContent> {
           child: Column(
             children: [
               const SizedBox(height: 90),
+              // ignore: sized_box_for_whitespace
               Container(
                 height: 124,
                 width: size.width * 0.9,
@@ -202,7 +203,7 @@ class _AddScreenContentState extends State<AddScreenContent> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       FactsInfoOne(),
-                      SizedBox(width: 20),
+                      const SizedBox(width: 20),
                       FactsTwo(),
                     ],
                   ),

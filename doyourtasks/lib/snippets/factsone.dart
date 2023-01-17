@@ -28,17 +28,17 @@ class FactsInfoOne extends StatelessWidget {
           Container(
             margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
             child: Column(
-              children: [
-                const Text("Remember",
+              children: const [
+                Text("Remember",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w700,
                     )),
-                const SizedBox(height: 10),
+                SizedBox(height: 10),
                 Text(
                   factTextOne,
                   // textAlign: TextAlign.left,
-                  style: const TextStyle(),
+                  style: TextStyle(),
                 ),
               ],
             ),

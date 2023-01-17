@@ -1,22 +1,13 @@
 import 'dart:convert';
 import 'package:doyourtasks/database/database_helper.dart';
 import 'package:doyourtasks/database/user.dart';
-import 'package:doyourtasks/views/add_screen/add_screen.dart';
-import 'package:doyourtasks/views/splash/splash.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqlite_api.dart';
 
 class HomeScreenContent extends StatefulWidget {
   const HomeScreenContent({Key? key}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
-}
-
-void _navigateToAddScreen(BuildContext context) {
-  Navigator.of(context)
-      .push(MaterialPageRoute(builder: (context) => const AddContentView()));
 }
 
 class _HomeScreenState extends State<HomeScreenContent> {
@@ -50,6 +41,7 @@ class _HomeScreenState extends State<HomeScreenContent> {
             child: Column(
               children: [
                 SizedBox(width: size.width, height: 60),
+                // ignore: sized_box_for_whitespace
                 Container(
                   width: size.width,
                   height: size.height * 0.20,
@@ -115,7 +107,7 @@ class _HomeScreenState extends State<HomeScreenContent> {
                       child: Center(
                           child: Text(
                         dateFormatter(DateTime.now()),
-                        style: TextStyle(fontSize: 18),
+                        style: const TextStyle(fontSize: 18),
                       )),
                     ),
                     const SizedBox(
@@ -207,6 +199,7 @@ class _HomeScreenState extends State<HomeScreenContent> {
                                               ),
                                               child: Column(
                                                 children: [
+                                                  // ignore: sized_box_for_whitespace
                                                   Container(
                                                     //      decoration: BoxDecoration(
                                                     //        border: Border.all(
@@ -280,6 +273,7 @@ class _HomeScreenState extends State<HomeScreenContent> {
                                                       ],
                                                     ),
                                                   ),
+                                                  // ignore: sized_box_for_whitespace
                                                   Container(
                                                     height: 54.5,
                                                     width: 200,
