@@ -1,9 +1,13 @@
-# Get your tasks done
+## To Do App 
 
-My first flutter application.
+ A simple ToDo App. Crossplatform.
 
-A simple ToDo App. Crossplatform.
+ And my First Flutter Project:)
 
-## Maik Renner 2022
+![](lib/assets/images/image1.jpeg)
 
+
+
+## Feedback and Support
+I value your feedback! If you have any suggestions, encounter issues, or just want to say hello, please reach out to me.
 

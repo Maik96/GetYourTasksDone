@@ -47,7 +47,7 @@ class _AddScreenContentState extends State<AddScreenContent> {
               const SizedBox(height: 90),
               // ignore: sized_box_for_whitespace
               Container(
-                height: 124,
+                height: 112,
                 width: size.width * 0.9,
                 child: Center(
                   child: Align(
