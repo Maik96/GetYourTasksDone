@@ -1,8 +1,6 @@
 // ignore_for_file: sized_box_for_whitespace
 
 import 'package:doyourtasks/assets/variables/variables.dart';
-import 'package:doyourtasks/database/database_helper.dart';
-import 'package:doyourtasks/database/user.dart';
 import 'package:doyourtasks/snippets/example_task.dart';
 import 'package:doyourtasks/views/home_screen/home_screen_content.dart';
 import 'package:flutter/material.dart';
@@ -75,6 +73,7 @@ class WelcomeScreenContent extends StatelessWidget {
                       Text(
                         infoText,
                         style: TextStyle(
+                            // ignore: prefer_const_constructors
                             color: Color.fromARGB(255, 98, 98, 98),
                             fontSize: size.height * 0.025,
                             fontWeight: FontWeight.bold),

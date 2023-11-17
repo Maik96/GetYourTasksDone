@@ -6,6 +6,7 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: prefer_const_constructors
     return WelcomeScreenContent();
   }
 }

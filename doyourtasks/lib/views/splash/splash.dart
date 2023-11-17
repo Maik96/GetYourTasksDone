@@ -1,6 +1,4 @@
 import 'package:after_layout/after_layout.dart';
-import 'package:doyourtasks/views/add_screen/add_screen_content.dart';
-import 'package:doyourtasks/views/home_screen/home_screen_content.dart';
 import 'package:doyourtasks/views/welcome_page/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,7 +7,7 @@ class Splash extends StatefulWidget {
   const Splash({super.key});
 
   @override
-  SplashState createState() => new SplashState();
+  SplashState createState() => SplashState();
 }
 
 class CustomPageRoute extends MaterialPageRoute {
